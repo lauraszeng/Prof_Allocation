@@ -1,0 +1,15 @@
+{% extends "allocation/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <br><br>
+    {% for assistant in assistants %}
+        <div class="container card assistant" id="{{ assistant.id }}">
+            <div class="card-title">
+                {{ assistant }}
+            </div>
+        </div>
+        <br><br>
+    {% endfor %}
+
+{% endblock %}

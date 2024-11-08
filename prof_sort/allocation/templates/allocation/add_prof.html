@@ -1,0 +1,29 @@
+{% extends "allocation/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+    <h2>Add Prof</h2>
+
+    <br>
+
+    <form action="{% url 'add_prof' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <h4>Name</h4>
+        {{ form.name }}
+        <br>
+        <h4>Surname</h4>
+        {{ form.surname }}
+        <br>
+        <h4>Position</h4>
+        {{ form.position }}
+        <h4>Courses</h4>
+        {{ form.courses }}
+
+        <br> <br>
+
+        <input type="submit" class="btn btn-primary">
+    </form>
+
+{% endblock %}

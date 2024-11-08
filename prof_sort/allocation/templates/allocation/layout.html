@@ -1,0 +1,52 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Professor Allocation{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{% static 'allocation/styles.css' %}" rel="stylesheet" type="text/css">
+        <script src="{% static 'allocation/script.js' %}"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <nav class="sidebar">
+            <div class="sidebar-item">
+                <h1>ProfSort 1.0</h1>
+            </div>
+            <div class="sidebar-item">
+                <ul class="nav">
+                    <li class="nav-item"">
+                        <a class="nav-link active" href="{% url 'index' %}">Index</a>
+                        <a class="nav-link active" href="{% url 'add_prof' %}">Add Prof</a>
+                        <a class="nav-link active" href="{% url 'add_course' %}">Add Course</a>
+                        <a class="nav-link active" href="{% url 'add_assistant' %}">Add Assistant</a>
+                    </li>
+                </ul>
+            </div> 
+            <div class="sidebar-scroll container" id="scrollbox">
+                {% for professor in professors %}
+                <div class="draggable card prof" draggable="true" id="{{ professor.id }}">
+                    <div class="card-title">
+                        {{ professor.name }} {{ professor.surname}}
+                    </div>
+                    <div class="card-subtitle mb-2 text-muted">
+                        {{ professor.position }}
+                    </div>
+                    <div class="card-subtitle mb-2">
+                        {% for course in professor.courses.all %}
+                        <p>{{ course }} ({{ course.credits}} credits)</p>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </nav>
+
+        <div class="main">
+            {% block body %}
+            {% endblock %}
+        </div>
+
+    </body>
+</html>
